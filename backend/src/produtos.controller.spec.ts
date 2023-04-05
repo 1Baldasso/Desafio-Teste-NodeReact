@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProdutosController } from './produtos.controller';
-import { ProdutosService } from './produtos.service';
-import { CreateProdutoDto } from './dto/create-produto.dto';
-import { UpdateProdutoDto } from './dto/update-produto.dto';
+import { ProdutosController } from './controllers/produtos.controller';
+import { ProdutosService } from './services/produtos.service';
+import { CreateProdutoDto } from './models/dto/create-produto.dto';
+import { UpdateProdutoDto } from './models/dto/update-produto.dto';
 
 describe('ProdutosController', () => {
   let controller: ProdutosController;
@@ -22,13 +22,13 @@ describe('ProdutosController', () => {
   });
   
   it('should return an array of products', () => {
-    controller.findAll().then((produtos) => {
+    controller.findAll("","").then((produtos) => {
       expect(produtos).toBeInstanceOf(Array);
     });
   });
   
   it('should be ordered by number of clicks', async () => {
-    controller.findAll().then((produtos) => {
+    controller.findAll("","").then((produtos) => {
       expect(produtos[0].numeroDeCliques.valueOf())
       .toBeGreaterThan(produtos[1].numeroDeCliques.valueOf())
     });
@@ -50,15 +50,17 @@ describe('ProdutosController', () => {
     });
   });
   it('should update a product', () => {
-    controller.update(id, new UpdateProdutoDto({"nome":"teste 2", "preco":10, "descricao": "teste 2","categoria":"teste 2", "imagem": "teste 2", "quantidade" : 10})).object.then((produto) => {
-      expect(produto).toBeDefined();
-    });
+    controller.update(id, new UpdateProdutoDto({"nome":"teste 2", "preco":10, "descricao": "teste 2","categoria":"teste 2", "imagem": "teste 2", "quantidade" : 10})).then(
+      (response) => {
+        expect(response.message).toBe("Updated");
+        expect(response.object).toBeDefined();
+      }
+    );
   });
   it('should delete a product', () => {
-    const removeMethod = controller.remove(id)
-    expect(removeMethod.message).toBe("Object removed successfully");
-    removeMethod.deleted.then((produto) => {
-      expect(produto).toBeDefined();
-    });
+    controller.remove(id).then((response)=>{
+      expect(response.message).toBe("Object removed successfully");
+      expect(response.deleted).toBeDefined();
+    })
   });
 });
