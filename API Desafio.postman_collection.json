@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "8377bbb0-6e6b-4d8a-a1e7-1ae3969597ef",
+		"name": "API Desafio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25814391"
+	},
+	"item": [
+		{
+			"name": "Novo Produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Pasta de Dentes Colgate\",\r\n    \"preco\": 12.00,\r\n    \"descricao\": \"Uma pasta para os dentes ficarem limpos\",\r\n    \"quantidade\": 1000,\r\n    \"categoria\": \"Higiene Pessoal\",\r\n    \"imagem\": \"https://www.dosecerta.com.br/uploads/dosecerta/produtos_imagens/7891024132906.png\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/produtos",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos os Produtos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Pablo\",\r\n    \"sobrenome\": \"Baldasso\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/produtos",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Produto por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/produtos/{{ITEM_ID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos",
+						"{{ITEM_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Produto",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Escova de Dentes Colgate\",\r\n    \"preco\": 15.00,\r\n    \"descricao\": \"Uma escova para os dentes ficarem limpos\",\r\n    \"quantidade\": 1000,\r\n    \"categoria\": \"Higiene Pessoal\",\r\n    \"imagem\": \"https://m.media-amazon.com/images/I/51Hy6-GGe7L._AC_SX355_.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/produtos/{{ITEM_ID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos",
+						"{{ITEM_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Produto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/produtos/{{ITEM_ID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos",
+						"{{ITEM_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar Por Nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/produtos?nome={{NOME_ITEM}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "{{NOME_ITEM}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar por Categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/produtos?categoria={{ITEM_CATEGORIA}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos"
+					],
+					"query": [
+						{
+							"key": "categoria",
+							"value": "{{ITEM_CATEGORIA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar por Nome e Categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/produtos/?nome=esc&categoria=Higiene%20Pessoal",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"produtos",
+						""
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "esc"
+						},
+						{
+							"key": "categoria",
+							"value": "Higiene%20Pessoal"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "ITEM_ID",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "NOME_ITEM",
+			"value": "Escova"
+		},
+		{
+			"key": "ITEM_CATEGORIA",
+			"value": "Higiene"
+		}
+	]
+}
