@@ -99,6 +99,10 @@ Produtos Controller
 Esse controlador é responsável por gerenciar as rotas relacionadas a produtos.
 
 ## Rotas
+
+### Um Arquivo do postman está anexo com requisições exemplo.
+```API_Desafio.postman_collection```
+
 ### POST /produtos
 Cria um novo produto.
 
