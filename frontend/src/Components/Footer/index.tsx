@@ -1,7 +1,7 @@
 export default function Footer()
 {
     return (
-        <footer>
+        <footer className="pb-3">
             <hr/>
             © Lojas Baldasso 
         </footer>
