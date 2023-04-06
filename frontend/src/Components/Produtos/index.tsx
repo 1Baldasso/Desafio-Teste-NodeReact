@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Categorias from '../Categorias';
 import ProdutoItem from '../ProdutoItem';
 import Produto from '../../models/ProdutoModel';
+import { getAllProdutos } from './services';
 export default function Produtos() {
     const produtoTeste: Produto = {
         id: "abcguid123",
@@ -15,7 +16,25 @@ export default function Produtos() {
         imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgcSwChHJkUqoevTLo7igM9V4iPvU64XYcJQ&usqp=CAU"
     };
 
-    const [produtos, setProdutos] = useState<Produto[]>([produtoTeste, produtoTeste, produtoTeste, produtoTeste, produtoTeste, produtoTeste]);
+    const [produtos, setProdutos] = useState<Produto[]>([]);
+    useEffect(() => {
+        getAllProdutos().then((produtos) => {
+            let listaProdutos: Produto[] = [];
+            produtos.map((produto: any) => {
+                const produtoTemp: Produto = {
+                    id: produto.id, 
+                    nome: produto.nome,
+                    preco: produto.preco,
+                    descricao: produto.descricao,
+                    categoria: produto.categoria,
+                    imagem: produto.imagem
+                }
+               listaProdutos.push(produtoTemp);
+               setProdutos(listaProdutos);
+            });
+        });
+    }, []);
+
     return (
         <main>
             <Container>

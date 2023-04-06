@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "types":  ["react", "react-dom", "react-router-dom","react-bootstrap"],
     "lib": [
       "dom",
       "dom.iterable",
