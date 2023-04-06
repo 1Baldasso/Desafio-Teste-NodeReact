@@ -23,4 +23,9 @@ https://teste-node-back-production.up.railway.app/produtos
 #### Repositório
 https://github.com/1Baldasso/teste-node-back
 
+## Rotas
+
+Todas as rotas estão definidas e prontas para no arquivo anexo
+```API Desafio.postman_collection.json```
+
 #### 06/04/2023
