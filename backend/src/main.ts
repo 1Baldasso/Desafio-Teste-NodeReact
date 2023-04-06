@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import { ProdutosModule } from './produtos/produtos.module';
+import { ProdutosModule } from './produtos.module';
+import * as express from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -15,6 +16,17 @@ async function bootstrap() {
     app.close();
   });
   const app = await NestFactory.create(ProdutosModule);
-  await app.listen(3000);
+  app.use((req:any,res:any,next:any) =>{
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    next();
+  })
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Accept',
+  })
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

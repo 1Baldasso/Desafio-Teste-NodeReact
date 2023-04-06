@@ -82,7 +82,7 @@
 		{
 			"name": "Atualizar Produto",
 			"request": {
-				"method": "PATCH",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -222,7 +222,7 @@
 	"variable": [
 		{
 			"key": "URL",
-			"value": "http://localhost:3000",
+			"value": "https://teste-node-back-production.up.railway.app",
 			"type": "string"
 		},
 		{
