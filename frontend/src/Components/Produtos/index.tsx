@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Categorias from '../Categorias';
 import ProdutoItem from '../ProdutoItem';
 import Produto from '../../models/ProdutoModel';
+import config from '../../Config/config';
 import { getAllProdutos } from './services';
 export default function Produtos() {
     const produtoTeste: Produto = {
@@ -18,22 +19,28 @@ export default function Produtos() {
 
     const [produtos, setProdutos] = useState<Produto[]>([]);
     useEffect(() => {
-        getAllProdutos().then((produtos) => {
-            let listaProdutos: Produto[] = [];
-            produtos.map((produto: any) => {
-                const produtoTemp: Produto = {
-                    id: produto.id, 
-                    nome: produto.nome,
-                    preco: produto.preco,
-                    descricao: produto.descricao,
-                    categoria: produto.categoria,
-                    imagem: produto.imagem
-                }
-               listaProdutos.push(produtoTemp);
-               setProdutos(listaProdutos);
-            });
-        });
-    }, []);
+        const getProdutos = async () => {
+          try {
+            const response = await fetch(`${config.ENDPOINT}/produtos`, {...config.options, method: 'GET'});
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const data = await response.json() as any[];
+            const produtos = data.map((produto: any) => ({
+              id: produto.id,
+              nome: produto.nome,
+              preco: produto.preco,
+              descricao: produto.descricao,
+              categoria: produto.categoria,
+              imagem: produto.imagem,
+            }));
+            setProdutos([produtoTeste, ...produtos]);
+          } catch (error) {
+            console.error('Error fetching produtos:', error);
+          }
+        };
+        getProdutos();
+      }, []);
 
     return (
         <main>

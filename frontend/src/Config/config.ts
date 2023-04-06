@@ -1,5 +1,5 @@
 const options: RequestInit = {
-    mode: "no-cors"
+    mode: "cors"
 }
 const config = {
     ENDPOINT: 'https://teste-node-back-production.up.railway.app',
